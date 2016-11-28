@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>计算器</title>
+<script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+	//window.onload = function(){}
+	$(document).ready(function(){
+		var inp = $("#display");
+		inp.val("");
+		
+		var x = 0,y = 0;	
+		
+		var type = 0;
+		
+		
+		$("td").bind("monseover",function(){
+			alert("11");								  
+		});
+		
+		$("td[rel='numeric']").click(function(){
+			inp.val(inp.val()+$(this).html());									  
+		});
+		
+		$("#add").click(function(){
+			x = inp.val();	
+			inp.val("");
+			type = 0;
+		});
+		
+		$("#subtract").click(function(){
+			x = inp.val();	
+			inp.val("");
+			type = 1;
+		});
+		
+		$("#multiply").click(function(){
+			x = inp.val();	
+			inp.val("");
+			type = 2;
+		});
+		
+		$("#division").click(function(){
+			x = inp.val();	
+			inp.val("");
+			type = 3;
+		});		
+		
+		$("#equal").click(function(){
+			if(x == 0 || x == null || x == "undefined" || x == ""){
+				alert("数据有误！");	
+				x = 0;
+				return;
+			}
+			if(inp.val() == "" || inp.val() == 0 || inp.val() == null || inp.val() == "undefined"){
+				alert("数据有误！");	
+				y = 0;
+				return;	
+			}
+			y = inp.val();
+			inp.val("");
+			
+			if(type == 0){//加法
+				var temp = parseFloat(x);
+				temp = temp + parseFloat(y);
+			}else if(type == 1){//减法
+				var temp = parseFloat(x);
+				temp = temp - parseFloat(y);
+			}else if(type == 2){//乘法
+				var temp = parseFloat(x);
+				temp = temp * parseFloat(y);
+			}else if(type == 3){//除法
+				var temp = parseFloat(x);
+				temp = temp / parseFloat(y);
+			}
+			inp.val(temp);
+			x = 0;
+			y = 0;
+		});
+	});
+</script>
+<style type="text/css">
+	.tab{width:160px;height:200px;text-align:center;border-left:#C30 solid 1px;border-top:#C30 solid 1px;}
+	.tab td{cursor:pointer;width:40px;border-right:#C30 solid 1px;border-bottom:#C30 solid 1px;}
+	.tab td:hover{background:#9FF;}
+</style>
+</head>
+
+<body>
+<table width="200" border="0" cellspacing="0" cellpadding="0" class="tab">
+  <tr>
+    <td colspan="4">
+    	<input name="" type="text" id="display" />
+    </td>
+  </tr>
+  <tr>
+    <td rel="numeric">7</td>
+    <td rel="numeric">8</td>
+    <td rel="numeric">9</td>
+    <td id="add">+</td>
+  </tr>
+  <tr>
+    <td rel="numeric">4</td>
+    <td rel="numeric">5</td>
+    <td rel="numeric">6</td>
+    <td id="subtract">-</td>
+  </tr>
+  <tr>
+    <td rel="numeric">1</td>
+    <td rel="numeric">2</td>
+    <td rel="numeric">3</td>
+    <td id="multiply">*</td>
+  </tr>
+  <tr>
+    <td rel="numeric">0</td>
+    <td rel="numeric">.</td>
+    <td id="equal">=</td>
+    <td id="division">/</td>
+  </tr>
+</table>
+</body>
+</html>
